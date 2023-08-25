@@ -1,0 +1,90 @@
+*{
+  margin: 0;
+  padding: 0;
+
+
+}
+
+body {
+  width: 350px;
+  height: 590px;
+  background-color: powderblue;
+  font-size: 16px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.container {
+  height: inherit;
+  width: inherit;
+}
+
+.title{
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+
+}
+
+.my_btn {
+  display: table-column;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #92DE34;
+  width: 45%;
+  height: 40px;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var#025600;
+  background-size: 100% 100%;
+  box-shadow: 0 0 0 7px var#92DE34 inset;
+  margin-bottom: 10px;
+}
+
+.content{
+  width: 100%;
+  height: 495px;
+  display: flex;
+    box-sizing: border-box;
+}
+
+.orders{
+  width: 50%;
+  display: block;
+  float: right;
+  margin: 0px 5px 0px 5px;
+}
+
+ul{
+  list-style: none;
+}
+
+#symbol{
+  width: 90%;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px;
+  text-transform: uppercase;
+}
+
+.symbol{
+  margin: 5px 0;
+}
+
+input::placeholder{
+  text-align: right;
+  padding: 2px;
+}
