@@ -1,5 +1,4 @@
 const inputCoin = document.querySelector("input#coin");
-let res = "";
 
 function fetchData() {
   var requestOptions = {
@@ -22,8 +21,6 @@ function fetchData() {
       throw new Error(error);
     });
 }
-
-// document.addEventListener("DOMContentLoaded", fetchData);
 
 function sortByPriceAsc(a, b) {
   return a.sellPrice - b.sellPrice;
@@ -106,6 +103,10 @@ function tableCreator(coinPrices, currency, type) {
 
     buy_btn.innerText = "BUY";
     sell_btn.innerText = "SELL";
+
+    buy_btn.addEventListener("click", () => {
+      console.log(exchangeDataAll.broker);
+    });
     div_broker_name.innerText = broker;
     div_coin_name.innerText = coin;
 
