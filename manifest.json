@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "First iran broker ever",
     "permissions": ["storage", "tabs"],
-    "host_permissions": ["https://*.nobitex.ir/*"],
+    "host_permissions": ["https://*.iranbroker.net/*"],
     "background": {
       "service_worker": "background.js"
     },
@@ -16,10 +16,6 @@
     "web_accessible_resources": [
       {
         "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png",
           "broker/*",
           "coins/*"
         ],
@@ -28,9 +24,9 @@
     ],
     "action": {
       "default_icon": {
-        "16": "assets/ext-icon.png",
-        "24": "assets/ext-icon.png",
-        "32": "assets/ext-icon.png"
+        "16": "assets/iranbroker.png",
+        "24": "assets/iranbroker.png",
+        "32": "assets/iranbroker.png"
       },
       "default_title": "iranbroker",
       "default_popup": "popup.html"
