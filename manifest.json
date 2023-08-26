@@ -1,35 +1,32 @@
 {
-    "name": "IRANBROKER",
-    "version": "1.0.0",
-    "description": "First iran broker ever",
-    "permissions": ["storage", "tabs"],
-    "host_permissions": ["https://*.iranbroker.net/*"],
-    "background": {
-      "service_worker": "background.js"
+  "name": "IRANBROKER",
+  "version": "1.0.0",
+  "description": "First iran broker ever",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://*.iranbroker.net/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.iranbroker.net/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["broker/*", "coins/*"],
+      "matches": ["https://*.iranbroker.net/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/iranbroker.png",
+      "24": "assets/iranbroker.png",
+      "32": "assets/iranbroker.png"
     },
-    "content_scripts": [
-      {
-        "matches": ["https://*.iranbroker.net/*"],
-        "js": ["contentScript.js"]
-      }
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "broker/*",
-          "coins/*"
-        ],
-        "matches": ["https://*.iranbroker.net/*"]
-      }
-    ],
-    "action": {
-      "default_icon": {
-        "16": "assets/iranbroker.png",
-        "24": "assets/iranbroker.png",
-        "32": "assets/iranbroker.png"
-      },
-      "default_title": "iranbroker",
-      "default_popup": "popup.html"
-    },
-    "manifest_version": 3
+    "default_title": "iranbroker",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
 }
