@@ -1,7 +1,7 @@
 const inputCoin = document.querySelector("input#coin");
 let res = "";
 
-async function fetchData() {
+function fetchData() {
   var requestOptions = {
     method: "GET",
     redirect: "follow",
@@ -13,12 +13,17 @@ async function fetchData() {
   url =
     "https://iranbroker.net/wp-admin/admin-ajax.php?action=ibwPricesUpdaterCompare";
 
-  const req = await fetch(url, requestOptions);
-  jsonResponse = await req.json();
-  return jsonResponse;
+  return fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 
-document.addEventListener("DOMContentLoaded", fetchData);
+// document.addEventListener("DOMContentLoaded", fetchData);
 
 function sortByPriceAsc(a, b) {
   return a.sellPrice - b.sellPrice;
@@ -28,7 +33,7 @@ function sortByPriceDec(a, b) {
   return b.buyPrice - a.buyPrice;
 }
 
-function getPricesOfCoin(coin) {
+function getPricesOfCoin(coin, jsonResponse) {
   const prices = [];
 
   for (const exchange in jsonResponse.exchangesPrices) {
@@ -127,10 +132,16 @@ function tableCreator(coinPrices, currency, type) {
 }
 
 inputCoin.addEventListener("change", () => {
-  const coin = inputCoin.value;
-  const coinPrices = getPricesOfCoin(coin);
-  tableCreator(coinPrices, "irt", "sell");
-  tableCreator(coinPrices, "usdt", "sell");
-  tableCreator(coinPrices, "irt", "buy");
-  tableCreator(coinPrices, "usdt", "buy");
+  let jsonResponse = "";
+
+  fetchData().then((data) => {
+    jsonResponse = data;
+    // console.log(jsonResponse)
+    const coin = inputCoin.value;
+    const coinPrices = getPricesOfCoin(coin, jsonResponse);
+    tableCreator(coinPrices, "irt", "sell");
+    tableCreator(coinPrices, "usdt", "sell");
+    tableCreator(coinPrices, "irt", "buy");
+    tableCreator(coinPrices, "usdt", "buy");
+  });
 });
