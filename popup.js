@@ -144,11 +144,7 @@ function tableCreator(coinPrices, currency, type, exchangeDataAll) {
   });
 }
 
-window.addEventListener("load", function () {
-  loadJs();
-});
-
-inputCoin.addEventListener("change", () => {
+function contentCreator() {
   let jsonResponse = "";
 
   fetchData().then((data) => {
@@ -160,4 +156,10 @@ inputCoin.addEventListener("change", () => {
     tableCreator(coinPrices, "irt", "buy", exchangeDataAll);
     tableCreator(coinPrices, "usdt", "buy", exchangeDataAll);
   });
+}
+
+window.addEventListener("load", function () {
+  loadJs();
 });
+
+inputCoin.addEventListener("change", contentCreator);
