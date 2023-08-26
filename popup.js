@@ -1,6 +1,9 @@
 const imputCoin = document.querySelector("input#coin")
 
-const mainTable = document.querySelector("table");
+const tableIrtSell = document.querySelector("table#irtSell");
+const tableIrtBuy = document.querySelector("table#irtSell");
+const tableUsdtSell = document.querySelector("table#irtSell");
+const tableUsdtBuy = document.querySelector("table#irtSell");
 
 document.addEventListener("DOMContentLoaded", async () => {
   var requestOptions = {
