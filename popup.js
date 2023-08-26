@@ -71,9 +71,13 @@ function tableCreator(coinPrices, currency, type) {
   const table = document.querySelector(
     `table#${currency + type.charAt(0).toUpperCase() + type.slice(1)}`
   );
-  table.innerHTML = `<tr><th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice</th><th>action</th></tr>`;
+  let action = (type === "sell") ? "buy" : "sell"
+  table.innerHTML = `<tr>
+  <th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${action} in ${currency}</th><th>action</th>
+  
+  </tr>`;
 
-  filtered.forEach((row) => {
+  filtered.slice(0,5).forEach((row) => {
     const broker = row.broker;
     const coin = row.coin;
     const tr = document.createElement("tr");
@@ -125,6 +129,7 @@ function tableCreator(coinPrices, currency, type) {
 }
 
 inputCoin.addEventListener("change", () => {
+  
   const coin = inputCoin.value;
   const coinPrices = getPricesOfCoin(coin);
 
