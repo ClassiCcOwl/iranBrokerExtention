@@ -33,11 +33,11 @@ function fetchData() {
 }
 
 function sortByPriceAsc(a, b) {
-  return a.sellPrice - b.sellPrice;
+  return a.buyPrice - b.buyPrice;
 }
 
 function sortByPriceDec(a, b) {
-  return b.buyPrice - a.buyPrice;
+  return b.sellPrice - a.sellPrice;
 }
 
 function getPricesOfCoin(coin, jsonResponse) {
@@ -75,17 +75,16 @@ function tableCreator(coinPrices, currency, type, exchangeDataAll) {
   let filtered = coinPrices.filter(
     (price) => price.currency === currency && price[`${type}Price`]
   );
-  if (type === "sell") {
+  if (type === "buy") {
     filtered.sort(sortByPriceAsc);
-  } else if (type === "buy") {
+  } else if (type === "sell") {
     filtered.sort(sortByPriceDec);
   }
   const table = document.querySelector(
     `table#${currency + type.charAt(0).toUpperCase() + type.slice(1)}`
   );
-  let action = type === "sell" ? "buy" : "sell";
   table.innerHTML = `<tr>
-  <th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${action} in ${currency}</th><th>action</th>
+  <th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${type} in ${currency}</th><th>action</th>
   
   </tr>`;
 
