@@ -52,6 +52,21 @@ broker = requests.get(url)
 print(broker.status_code)
 soup = bs(broker.content, 'lxml')
 logos = soup.select('img.ibw-exchange-logo')
+
+
+extradata = soup.select_one(
+    'script#ibw-exchange-comparison-script-short-code-js-extra')
+data = extradata.text.replace("var ibwMainData = ", "").replace(";", "")
+
+data = json.loads(data)
+
+json_data = json.dumps(data['exchangesSettings'])
+
+
+with open("exchanges.json", "w") as file:
+    file.write(json_data)
+
+
 for logo in logos:
     if 'data-lazy-src' not in logo.attrs:
         url = logo['src']
@@ -77,7 +92,6 @@ for coin in coins:
     temp = pd.DataFrame({"urls": url, "names": name,
                         "names2": name2}, index=[0])
     coins_df = pd.concat([coins_df, temp], ignore_index=True)
-
 
 
 download_all_images(brokers_df, dirname="brokers")
