@@ -39,17 +39,17 @@ tr:nth-child(odd)
 {
 background: powderblue;
 }
-tr td:nth-child(7) {
+tr td:last-child {
   display: grid;
   row-gap: 3px;
 }
-tr td:nth-child(7) button {
+tr td:last-child button {
   border: none;
 }
 
-tr td:nth-child(7) button:nth-child(2){
+tr td:last-child button:nth-child(2){
   background: rgba(23, 172, 146, 1) !important;
 }
-tr td:nth-child(7) button:nth-child(1){
+tr td:last-child button:nth-child(1){
   background: #EF4056!important;
 }
