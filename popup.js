@@ -1,4 +1,6 @@
 const inputCoin = document.querySelector("input#coin");
+const refresh = document.querySelector("button#refresh");
+
 let exchangeDataAll;
 function loadJs() {
   return fetch("./exchanges.json")
@@ -163,3 +165,5 @@ window.addEventListener("load", function () {
 });
 
 inputCoin.addEventListener("change", contentCreator);
+
+refresh.addEventListener("click", contentCreator);
