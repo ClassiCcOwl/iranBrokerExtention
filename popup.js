@@ -1,4 +1,12 @@
 const inputCoin = document.querySelector("input#coin");
+let exchangeDataAll;
+function loadJs() {
+  return fetch("./exchanges.json")
+    .then((res) => res.json())
+    .then((data) => {
+      exchangeDataAll = data;
+    });
+}
 
 function fetchData() {
   var requestOptions = {
@@ -61,7 +69,7 @@ function getPricesOfCoin(coin, jsonResponse) {
   return prices;
 }
 
-function tableCreator(coinPrices, currency, type) {
+function tableCreator(coinPrices, currency, type, exchangeDataAll) {
   let filtered = coinPrices.filter(
     (price) => price.currency === currency && price[`${type}Price`]
   );
@@ -105,7 +113,11 @@ function tableCreator(coinPrices, currency, type) {
     sell_btn.innerText = "SELL";
 
     buy_btn.addEventListener("click", () => {
-      console.log(exchangeDataAll.broker);
+      open(exchangeDataAll[broker].exchangeLink);
+    });
+
+    sell_btn.addEventListener("click", () => {
+      open(exchangeDataAll[broker].exchangeLink);
     });
     div_broker_name.innerText = broker;
     div_coin_name.innerText = coin;
@@ -132,17 +144,20 @@ function tableCreator(coinPrices, currency, type) {
   });
 }
 
+window.addEventListener("load", function () {
+  loadJs();
+});
+
 inputCoin.addEventListener("change", () => {
   let jsonResponse = "";
 
   fetchData().then((data) => {
     jsonResponse = data;
-    // console.log(jsonResponse)
     const coin = inputCoin.value;
     const coinPrices = getPricesOfCoin(coin, jsonResponse);
-    tableCreator(coinPrices, "irt", "sell");
-    tableCreator(coinPrices, "usdt", "sell");
-    tableCreator(coinPrices, "irt", "buy");
-    tableCreator(coinPrices, "usdt", "buy");
+    tableCreator(coinPrices, "irt", "sell", exchangeDataAll);
+    tableCreator(coinPrices, "usdt", "sell", exchangeDataAll);
+    tableCreator(coinPrices, "irt", "buy", exchangeDataAll);
+    tableCreator(coinPrices, "usdt", "buy", exchangeDataAll);
   });
 });
