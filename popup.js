@@ -1,3 +1,5 @@
+const imputCoin = document.querySelector("input#coin")
+
 const mainTable = document.querySelector("table");
 
 document.addEventListener("DOMContentLoaded", async () => {
