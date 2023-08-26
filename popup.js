@@ -5,7 +5,7 @@ const tableIrtBuy = document.querySelector("table#irtSell");
 const tableUsdtSell = document.querySelector("table#irtSell");
 const tableUsdtBuy = document.querySelector("table#irtSell");
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function fetchData(){
   var requestOptions = {
     method: "GET",
     redirect: "follow",
@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const req = await fetch(url, requestOptions);
   const res = await req.json();
+
+  return res
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  
 
   for (let broker in res["exchangesPrices"]) {
     for (let coin in res["exchangesPrices"][broker]["prices"]) {
@@ -78,12 +84,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-
-
-
-
-
-const jsonResponse = z;
 function sortByPriceAsc(a, b) {
   return a.sellPrice - b.sellPrice;
 }
@@ -91,6 +91,12 @@ function sortByPriceAsc(a, b) {
 function sortByPriceDec(a, b) {
   return b.buyPrice - a.buyPrice;
 }
+
+
+
+
+
+const jsonResponse = z;
 
 // Function to get all prices of a specific coin across brokers
 function getPricesOfCoin(coin) {
