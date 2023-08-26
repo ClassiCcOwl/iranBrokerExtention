@@ -40,7 +40,7 @@ function getPricesOfCoin(coin) {
         for (const currency in coinPrices) {
           if (coinPrices.hasOwnProperty(currency)) {
             const priceData = coinPrices[currency];
-            const buyPrice = priceData.buy; // Change to "sell" if needed
+            const buyPrice = priceData.buy;
             const sellPrice = priceData.sell;
 
             prices.push({
@@ -71,13 +71,13 @@ function tableCreator(coinPrices, currency, type) {
   const table = document.querySelector(
     `table#${currency + type.charAt(0).toUpperCase() + type.slice(1)}`
   );
-  let action = (type === "sell") ? "buy" : "sell"
+  let action = type === "sell" ? "buy" : "sell";
   table.innerHTML = `<tr>
   <th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${action} in ${currency}</th><th>action</th>
   
   </tr>`;
 
-  filtered.slice(0,5).forEach((row) => {
+  filtered.slice(0, 5).forEach((row) => {
     const broker = row.broker;
     const coin = row.coin;
     const tr = document.createElement("tr");
@@ -109,7 +109,7 @@ function tableCreator(coinPrices, currency, type) {
     td_broker_image.appendChild(broker_image);
     td_coin_image.appendChild(coin_image);
 
-    const buy = row[`${type}Price`];
+    const buy = parseFloat(row[`${type}Price`]).toFixed(3);
 
     td_price.append(buy);
 
@@ -124,22 +124,13 @@ function tableCreator(coinPrices, currency, type) {
     tr.appendChild(td_sell_buy);
     table.appendChild(tr);
   });
-
-  // return filtered;
 }
 
 inputCoin.addEventListener("change", () => {
-  
   const coin = inputCoin.value;
   const coinPrices = getPricesOfCoin(coin);
-
-  let sellIRTPrices = tableCreator(coinPrices, "irt", "sell");
-  let sellUSDTPrices = tableCreator(coinPrices, "usdt", "sell");
-  let buyIRTPrices = tableCreator(coinPrices, "irt", "buy");
-  let buyUSDTPrices = tableCreator(coinPrices, "usdt", "buy");
-
-  console.log(sellIRTPrices);
-  console.log(sellUSDTPrices);
-  console.log(buyIRTPrices);
-  console.log(buyUSDTPrices);
+  tableCreator(coinPrices, "irt", "sell");
+  tableCreator(coinPrices, "usdt", "sell");
+  tableCreator(coinPrices, "irt", "buy");
+  tableCreator(coinPrices, "usdt", "buy");
 });
