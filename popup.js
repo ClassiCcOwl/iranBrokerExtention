@@ -25,7 +25,6 @@ async function fetchData() {
 
 document.addEventListener("DOMContentLoaded", fetchData);
 
-
 function sortByPriceAsc(a, b) {
   return a.sellPrice - b.sellPrice;
 }
@@ -67,57 +66,26 @@ function getPricesOfCoin(coin) {
   return prices;
 }
 
+function tableCreator(coinPrices, currency, type) {
+  let filtered = coinPrices.filter(
+    (price) => price.currency === currency && price[type]
+  );
+  if (type === "sellPrice") {
+    filtered.sort(sortByPriceAsc);
+  } else if (type === "buyPrice") {
+    filtered.sort(sortByPriceDec);
+  }
+
+  return filtered;
+}
+
 inputCoin.addEventListener("change", () => {
   const coinPrices = getPricesOfCoin("btc");
 
-  let sellIRTPrices = coinPrices.filter(
-    (price) => price.currency === "irt" && price.sellPrice
-  );
-  let sellUSDTPrices = coinPrices.filter(
-    (price) => price.currency === "usdt" && price.sellPrice
-  );
-  let buyIRTPrices = coinPrices.filter(
-    (price) => price.currency === "irt" && price.buyPrice
-  );
-  let buyUSDTPrices = coinPrices.filter(
-    (price) => price.currency === "usdt" && price.buyPrice
-  );
+  let sellIRTPrices = tableCreator(coinPrices, "irt", "sellPrice");
+  let sellUSDTPrices = tableCreator(coinPrices, "usdt", "sellPrice");
+  let buyIRTPrices = tableCreator(coinPrices, "irt", "buyPrice");
+  let buyUSDTPrices = tableCreator(coinPrices, "usdt", "buyPrice");
 
-  sellIRTPrices.sort(sortByPriceAsc);
-  sellUSDTPrices.sort(sortByPriceAsc);
-  buyIRTPrices.sort(sortByPriceDec);
-  buyUSDTPrices.sort(sortByPriceDec);
-  console.log(jsonResponse);
-  console.log(coinPrices);
-  // Print sorted prices
-  console.log("Sell IRT Prices:");
-  sellIRTPrices.forEach((price) => {
-    console.log(
-      `Broker: ${price.broker}, Coin: ${price.coin}, Sell Price (IRT): ${price.sellPrice}`
-    );
-  });
 
-  // Print sorted prices for Sell USDT
-  console.log("Sell USDT Prices:");
-  sellUSDTPrices.forEach((price) => {
-    console.log(
-      `Broker: ${price.broker}, Coin: ${price.coin}, Sell Price (USDT): ${price.sellPrice}`
-    );
-  });
-
-  // Print sorted prices for Buy IRT
-  console.log("Buy IRT Prices:");
-  buyIRTPrices.forEach((price) => {
-    console.log(
-      `Broker: ${price.broker}, Coin: ${price.coin}, Buy Price (IRT): ${price.buyPrice}`
-    );
-  });
-
-  // Print sorted prices for Buy USDT
-  console.log("Buy USDT Prices:");
-  buyUSDTPrices.forEach((price) => {
-    console.log(
-      `Broker: ${price.broker}, Coin: ${price.coin}, Buy Price (USDT): ${price.buyPrice}`
-    );
-  });
 });
