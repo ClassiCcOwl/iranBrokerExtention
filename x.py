@@ -42,9 +42,12 @@ extradata = soup.select_one(
     'script#ibw-exchange-comparison-script-short-code-js-extra')
 data = extradata.text.replace("var ibwMainData = ", "").replace(";", "")
 data = json.loads(data)
-json_data = json.dumps(data['exchangesSettings'])
-with open("exchanges.json", "w") as file:
-    file.write(json_data)
+
+data_keys = list(data.keys())
+for key in data_keys:
+    if key != "exchangesSettings":
+        del data[key]
+
 for logo in logos:
     if 'data-lazy-src' not in logo.attrs:
         url = logo['src']
@@ -70,3 +73,15 @@ for coin in coins:
     coins_df = pd.concat([coins_df, temp], ignore_index=True)
 download_all_images(brokers_df, dirname="brokers")
 download_all_images(coins_df, dirname="coins")
+
+a = list(zip(coins_df['names'], coins_df['names']))
+b = list((k, v) for k, v in zip(coins_df['names2'], coins_df['names']) if k != "" and v != "")
+a = a+b
+translator = dict(a)
+
+
+data["translator"] = translator
+
+json_data = json.dumps(data)
+with open("exchanges.json", "w") as file:
+    file.write(json_data)
