@@ -136,3 +136,12 @@ window.addEventListener("load", function () {
 });
 inputCoin.addEventListener("change", contentCreator);
 refresh.addEventListener("click", contentCreator);
+
+const checkbox = document.querySelector(".checkbox");
+
+const switchLabel = document.querySelector(".toggle-thumb");
+switchLabel.addEventListener("click", () => {
+  console.log("ha");
+  document.querySelector(".usdt").classList.toggle("none");
+  document.querySelector(".irt").classList.toggle("none");
+});
