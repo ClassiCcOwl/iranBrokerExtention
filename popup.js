@@ -120,21 +120,44 @@ function tableCreator(coinPrices, currency, type, exchangeDataAll) {
   });
 }
 function contentCreator() {
-  let jsonResponse = "";
-  fetchData().then((data) => {
-    jsonResponse = data;
-    const coin = exchangeDataAll["translator"][inputCoin.value];
-    const coinPrices = getPricesOfCoin(coin, jsonResponse);
-    tableCreator(coinPrices, "irt", "sell", exchangeDataAll["exchangesSettings"]);
-    tableCreator(coinPrices, "usdt", "sell", exchangeDataAll["exchangesSettings"]);
-    tableCreator(coinPrices, "irt", "buy", exchangeDataAll["exchangesSettings"]);
-    tableCreator(coinPrices, "usdt", "buy", exchangeDataAll["exchangesSettings"]);
-  });
+  if (inputCoin.value) {
+    let jsonResponse = "";
+    fetchData().then((data) => {
+      jsonResponse = data;
+      const coin = exchangeDataAll["translator"][inputCoin.value];
+      if (coin) {
+        const coinPrices = getPricesOfCoin(coin, jsonResponse);
+        tableCreator(
+          coinPrices,
+          "irt",
+          "sell",
+          exchangeDataAll["exchangesSettings"]
+        );
+        tableCreator(
+          coinPrices,
+          "usdt",
+          "sell",
+          exchangeDataAll["exchangesSettings"]
+        );
+        tableCreator(
+          coinPrices,
+          "irt",
+          "buy",
+          exchangeDataAll["exchangesSettings"]
+        );
+        tableCreator(
+          coinPrices,
+          "usdt",
+          "buy",
+          exchangeDataAll["exchangesSettings"]
+        );
+      }
+    });
+  }
 }
 window.addEventListener("load", async function () {
   await loadJs();
-  var coins= Object.keys(exchangeDataAll["translator"]);
-  // console.log(countries)
+  var coins = Object.keys(exchangeDataAll["translator"]);
   autocomplete(inputCoin, coins);
 });
 inputCoin.addEventListener("change", contentCreator);
