@@ -167,3 +167,8 @@ svg {
 .none {
   display: none;
 }
+
+
+.nav{
+  display: flex;
+}
