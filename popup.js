@@ -161,8 +161,6 @@ window.addEventListener("load", async function () {
   autocomplete(inputCoin, coins);
 });
 
-
-
 inputCoin.addEventListener("changed", contentCreator);
 inputCoin.addEventListener("keydown", contentCreator);
 refresh.addEventListener("click", contentCreator);
@@ -248,3 +246,45 @@ function autocomplete(inp, arr) {
     closeAllLists(e.target);
   });
 }
+
+function forex_factory_cal() {
+  const calendar = document.querySelector("#calendar");
+  var news;
+  fetch(
+    "http://89.106.206.213:5000/today",
+
+    {
+      method: "GET",
+      redirect: "follow",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((resp) => resp.json())
+    .then((data) => {
+      calendar.innerHTML = "";
+      data.forEach((ev) => {
+        const tr = document.createElement("TR");
+        const td_title = document.createElement("TD");
+        const td_actual = document.createElement("TD");
+        const td_previous = document.createElement("TD");
+        const td_date = document.createElement("TD");
+        const td_time = document.createElement("TD");
+        td_title.innerText = ev.title;
+        td_actual.innerText = ev.actual;
+        td_previous.innerText = ev.previous;
+        td_date.innerText = ev.date;
+        td_time.innerText = ev.time;
+        tr.appendChild(td_title);
+        tr.appendChild(td_actual);
+        tr.appendChild(td_previous);
+        tr.appendChild(td_date);
+        tr.appendChild(td_time);
+
+        calendar.appendChild(tr);
+      });
+    });
+}
+
+setInterval(forex_factory_cal, 30000);
