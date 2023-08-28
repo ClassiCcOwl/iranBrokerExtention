@@ -160,7 +160,11 @@ window.addEventListener("load", async function () {
   var coins = Object.keys(exchangeDataAll["translator"]);
   autocomplete(inputCoin, coins);
 });
-inputCoin.addEventListener("change", contentCreator);
+
+
+
+inputCoin.addEventListener("changed", contentCreator);
+inputCoin.addEventListener("keydown", contentCreator);
 refresh.addEventListener("click", contentCreator);
 
 const checkbox = document.querySelector(".checkbox");
@@ -217,6 +221,7 @@ function autocomplete(inp, arr) {
       if (currentFocus > -1) {
         if (x) x[currentFocus].click();
       }
+      // closeAllLists(e)
     }
   });
   function addActive(x) {
