@@ -199,7 +199,7 @@ function autocomplete(inp, arr) {
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
         b.addEventListener("click", function (e) {
           inp.value = this.getElementsByTagName("input")[0].value;
-          contentCreator()
+          contentCreator();
           closeAllLists();
         });
         a.appendChild(b);
@@ -271,18 +271,23 @@ function forex_factory_cal() {
         const td_title = document.createElement("TD");
         const td_actual = document.createElement("TD");
         const td_previous = document.createElement("TD");
-        const td_date = document.createElement("TD");
+        const td_forecast = document.createElement("TD");
         const td_time = document.createElement("TD");
+        const td_currency = document.createElement("TD");
         td_title.innerText = ev.title;
         td_actual.innerText = ev.actual;
+        td_forecast.innerText = ev.forecast;
         td_previous.innerText = ev.previous;
-        td_date.innerText = ev.date;
         td_time.innerText = ev.time;
+        td_currency.innerHTML = ev.currency;
+        ev.actualtype && td_actual.classList.add(ev.actualtype);
+        ev.previoustype && td_previous.classList.add(ev.previoustype);
+        tr.appendChild(td_time);
+        tr.appendChild(td_currency);
         tr.appendChild(td_title);
         tr.appendChild(td_actual);
+        tr.appendChild(td_forecast);
         tr.appendChild(td_previous);
-        tr.appendChild(td_date);
-        tr.appendChild(td_time);
 
         calendar.appendChild(tr);
       });
