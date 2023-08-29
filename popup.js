@@ -71,7 +71,7 @@ function tableCreator(coinPrices, currency, type, exchangeDataAll) {
   const table = document.querySelector(
     `table#${currency + type.charAt(0).toUpperCase() + type.slice(1)}`
   );
-  table.innerHTML = `<tr><th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${type} in ${currency}</th><th>action</th></tr>`;
+  table.innerHTML = `<thead><tr><th>broker</th><th>broker</th><th>coin</th><th>coin</th><th>bestprice to ${type} in ${currency}</th><th>action</th></tr></thead>`;
   filtered.slice(0, 5).forEach((row) => {
     const broker = row.broker;
     const coin = row.coin;
@@ -156,7 +156,7 @@ function contentCreator() {
   }
 }
 window.addEventListener("load", async function () {
-  forex_factory_cal()
+  forex_factory_cal();
   await loadJs();
   var coins = Object.keys(exchangeDataAll["translator"]);
   autocomplete(inputCoin, coins);
@@ -266,7 +266,8 @@ function forex_factory_cal() {
   )
     .then((resp) => resp.json())
     .then((data) => {
-      calendar.innerHTML = "<tr><th>time</th><th>currency</th><th>title</th><th>actual</th><th>forecast</th><th>previous</th></tr>"
+      calendar.innerHTML =
+        "<thead><tr><th>time</th><th>currency</th><th>title</th><th>actual</th><th>forecast</th><th>previous</th></tr></thead>";
       data.forEach((ev) => {
         const tr = document.createElement("TR");
         const td_title = document.createElement("TD");
@@ -289,7 +290,6 @@ function forex_factory_cal() {
         tr.appendChild(td_actual);
         tr.appendChild(td_forecast);
         tr.appendChild(td_previous);
-
         calendar.appendChild(tr);
       });
     });
