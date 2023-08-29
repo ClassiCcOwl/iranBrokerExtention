@@ -156,6 +156,7 @@ function contentCreator() {
   }
 }
 window.addEventListener("load", async function () {
+  forex_factory_cal()
   await loadJs();
   var coins = Object.keys(exchangeDataAll["translator"]);
   autocomplete(inputCoin, coins);
