@@ -287,4 +287,4 @@ function forex_factory_cal() {
     });
 }
 
-setInterval(forex_factory_cal, 30000);
+setInterval(forex_factory_cal, 5000);
