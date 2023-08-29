@@ -161,8 +161,9 @@ window.addEventListener("load", async function () {
   autocomplete(inputCoin, coins);
 });
 
-inputCoin.addEventListener("changed", contentCreator);
-inputCoin.addEventListener("keydown", contentCreator);
+// inputCoin.addEventListener("changed", contentCreator);
+// inputCoin.addEventListener("keydown", contentCreator);
+inputCoin.addEventListener("input", contentCreator);
 refresh.addEventListener("click", contentCreator);
 
 const checkbox = document.querySelector(".checkbox");
@@ -198,6 +199,7 @@ function autocomplete(inp, arr) {
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
         b.addEventListener("click", function (e) {
           inp.value = this.getElementsByTagName("input")[0].value;
+          contentCreator()
           closeAllLists();
         });
         a.appendChild(b);
