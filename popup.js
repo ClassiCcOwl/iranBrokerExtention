@@ -265,7 +265,7 @@ function forex_factory_cal() {
   )
     .then((resp) => resp.json())
     .then((data) => {
-      calendar.innerHTML = "";
+      calendar.innerHTML = "<tr><th>time</th><th>currency</th><th>title</th><th>actual</th><th>forecast</th><th>previous</th></tr>"
       data.forEach((ev) => {
         const tr = document.createElement("TR");
         const td_title = document.createElement("TD");
