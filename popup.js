@@ -280,6 +280,9 @@ function forex_factory_cal() {
         td_actual.innerText = ev.actual;
         td_forecast.innerText = ev.forecast;
         td_previous.innerText = ev.previous;
+        if (ev.revised) {
+          td_previous.innerText = ev.revised;
+        }
         td_time.innerText = ev.time;
         td_currency.innerHTML = ev.currency;
         ev.actualtype && td_actual.classList.add(ev.actualtype);
