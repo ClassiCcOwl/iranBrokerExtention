@@ -151,6 +151,15 @@ function contentCreator() {
           "buy",
           exchangeDataAll["exchangesSettings"]
         );
+
+        const indicator_img = document.getElementById("indicator");
+
+        indicator_img.setAttribute(
+          "src",
+          `https://classiccowl.pythonanywhere.com/generate_plot?coin=${coin}-USD`
+        );
+        indicator_img.setAttribute("width", "450");
+        indicator_img.setAttribute("height", "450");
       }
     });
   }
